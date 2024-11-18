@@ -303,7 +303,7 @@ def render_login():
         if st.form_submit_button("Login"):
             if login_user(email, password):
                 st.success("Login successful!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Invalid email or password")
 
@@ -318,7 +318,7 @@ def render_signup():
         if st.form_submit_button("Sign Up"):
             if register_user(email, password, department, city):
                 st.success("Registration successful!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Email already exists")
 
@@ -344,7 +344,7 @@ def render_profile():
                 name, age, gender, years_service, department, city
             )
             st.success("Profile updated successfully!")
-            st.experimental_rerun()
+            st.rerun()
 
 def render_questionnaire(assessment_type_id):
     """Render the questionnaire with no pre-filled answers and thank you popup"""
@@ -408,7 +408,7 @@ def render_questionnaire(assessment_type_id):
                 st.success("Thank you for completing the assessment!")
                 time.sleep(2)  # Show success message for 2 seconds
                 st.session_state.section = "Dashboard"
-                st.experimental_rerun()
+                st.rerun()
 
 def render_dashboard():
     user_profile = get_user_profile(st.session_state.current_user)
@@ -530,7 +530,7 @@ def main():
             )
             if 'is_admin_view' not in st.session_state or is_admin_view != st.session_state.is_admin_view:
                 st.session_state.is_admin_view = is_admin_view
-                st.experimental_rerun()
+                st.rerun()
             st.sidebar.markdown("---")  # Add a separator
         
         section = st.sidebar.radio(
@@ -566,7 +566,7 @@ def main():
         if st.sidebar.button("Logout"):
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
-            st.experimental_rerun()
+            st.rerun()
 
 if __name__ == "__main__":
     main()
